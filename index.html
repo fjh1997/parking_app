@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="manifest" href="manifest.json">
+	<link rel="apple-touch-icon" sizes="250×250" href="e.png">
+
+	<title>停车APP</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<link href="css/offcanvas.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/map.css" media="screen" title="no title" charset="utf-8">
+
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/offcanvas.js"></script>
+	<script type="text/javascript" src="js/storage.js"></script>
+
+
+	<script type="text/javascript">
+		window.onresize = function () {
+			location.reload();
+
+		}
+
+		// 点击顶部按钮时修改图标与字体的颜色，并修改本页面内主要展示的内容
+		function daohang_method(number) {
+			//只有点击的按钮变色，其它按钮保持灰色
+			for (i = 0; i < 4; i++) {
+				var temp_element = document.getElementById("daohang" + String(i));
+				var brother = temp_element.parentNode.children[1];
+				var temp_string = temp_element.getAttribute("src");
+
+				if (i == number) {
+					temp_element.setAttribute("src", temp_string.substr(0, temp_string.length - 5) + "2.png");
+					brother.setAttribute("style", "color: #1296DB;");
+				} else {
+					temp_element.setAttribute("src", temp_string.substr(0, temp_string.length - 5) + "1.png");
+					brother.setAttribute("style", "color: #707070;");
+				}
+			}
+			var mod = "";
+
+			switch (number) {
+				case 0:
+					mod = "请点击车位进行预约";
+					document.getElementById("yuyue").style.display = "block";//取消隐藏确定按钮
+					document.getElementById("map").src = "停车场.png"; // 更换#map图片元素的url使得汽车图片转化为停车场图片。
+					document.getElementById("choiceCanvas").style.display = "inline-block";//取消隐藏choiceCanvas画布
+
+
+					break;
+				case 1:
+					mod = "请根据导航将车辆驾驶至预约车位，停放完成后请点击\"继续\"";   // 待完成 
+					document.getElementById("driver").style.display = "block";//取消隐藏虚拟遥感
+					choicecanvas.removeEventListener('click',choice , false);
+
+					document.getElementById("gameCanvas").style.display = "inline-block";//取消隐藏gameCanvas画布
+					document.getElementById("yuyue").parentElement.innerHTML = document.getElementById("yuyue").parentElement.innerHTML;
+					document.getElementById("queding").innerText = "继续";
+					document.getElementById("yuyue").addEventListener("click", function (event) {
+						daohang_method(2);
+
+					})
+
+					break;
+				case 2:
+					mod = "以下是您的位置与车辆停放位置，待您坐入车辆准备离场时请点击\"离场\"";  // 待完成 
+					document.getElementById("yuyue").parentElement.innerHTML = document.getElementById("yuyue").parentElement.innerHTML;
+					document.getElementById("queding").innerText = "离场";
+					document.getElementById("yuyue").addEventListener("click", function (event) {
+						daohang_method(3);
+
+					})
+
+
+					break;
+				case 3:
+					mod = "请缴费40元";  // 待完成
+					document.getElementById("choiceCanvas").style.display = "none";//隐藏choiceCanvas画布
+					document.getElementById("gameCanvas").style.display = "none";//隐藏gameCanvas画布
+					document.getElementById("driver").style.display = "none";//隐藏虚拟遥感
+
+					document.getElementById("map").src = "支付宝.png";
+					document.getElementById("map").style.width="250px";
+					document.getElementById("container").style.width="250px";
+
+					document.getElementById("yuyue").parentElement.innerHTML = document.getElementById("yuyue").parentElement.innerHTML;
+					document.getElementById("queding").innerText = "支付完成";
+					document.getElementById("yuyue").addEventListener("click", function (event) {
+						alert("支付成功！");
+					})
+
+					break;
+				default:
+			}
+			document.getElementById("para").innerText = mod;
+		}
+		function yuyue() {
+			console.log("预约成功");
+		}
+		// 首先对停车预约对这个界面都进行隐藏
+		window.onload = function () {
+			document.getElementById("driver").style.display = "none";//隐藏虚拟遥感
+			document.getElementById("yuyue").style.display = "none";//隐藏确定按钮
+			document.getElementById("gameCanvas").style.display = "none";//隐藏gameCanvas画布
+			document.getElementById("choiceCanvas").style.display = "none";//隐藏choiceCanvas画布
+			document.getElementById("map").src = "停车.png"; //设置#map元素的图片路径为停车.png
+
+		}
+	</script>
+</head>
+
+<body>
+	<!-- 侧边栏与上边栏始终浮在屏幕上方 -->
+	<div class="upflow">
+		<!-- 侧边栏 -->
+		<nav class="navbar navbar-inverse navbar-static-top" style="padding: 0;margin: 0;">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed pull-left" data-toggle="offcanvas">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a style="text-align:center;" class="navbar-brand" href="#">首页</a>
+				</div>
+				<!-- 侧面出来都菜单 -->
+				<div id="navbar" class="collapse navbar-collapse sidebar-offcanvas">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">首页</a></li>
+						<li><a href="dingdan.html">订单</a></li>
+						<li><a href="cheliangxinxi.html">车辆信息</a></li>
+						<li><a href="qianbao.html">钱包</a></li>
+						<li><a href="kefu.html">客服</a></li>
+						<li><a href="shezhi.html">设置</a></li>
+					</ul>
+				</div>
+
+			</div>
+
+		</nav>
+		<!-- 上边栏 -->
+		<ul class="daohang">
+			<li><a href="javascript:void(0);" id="dao"  onclick="daohang_method(0);" ><img id="daohang0" src="img/yvyue1.png">
+					<p>预约车位</p>
+				</a></li>
+			<li><a href="javascript:void(0);" disabled=true><img id="daohang1" src="img/daohang1.png">
+					<p>导航</p>
+				</a></li>
+			<li><a href="javascript:void(0);" disabled=true><img id="daohang2" src="img/tingche1.png">
+					<p>寻车</p>
+				</a></li>
+			<li><a href="javascript:void(0);" disabled=true ><img id="daohang3" src="img/shezhi1.png">
+					<p>缴费离场</p>
+				</a></li>
+		</ul>
+	</div>
+
+	<!-- 页面主要展示的内容 -->
+	<div id="shouye_content">
+		<p id="para">欢迎使用停车app,设置车型后请点击“预约车位”开始预约</p>
+		<div id="container">
+
+			<img id='map' style="z-index: 1;" src="停车场.png" />
+			<canvas id="gameCanvas" style="z-index: 3;"></canvas>
+			<canvas id="choiceCanvas" style="z-index: 2;"></canvas>
+
+		</div>
+		<ul class="anniu" style="position:relative;top: 0px;">
+			<li>
+				<div id="yuyue">
+					<a id="queding" onclick="yuyue();">确定</a>
+				</div>
+			</li>
+		</ul>
+		<div id="driver"></div>
+
+
+	</div>
+
+	<script type="text/javascript" src="js/nipplejs.js"></script>
+	<script type="text/javascript" src="js/park.js"></script>
+
+	<script type="text/javascript" src="js/driver.js"></script>
+	<script type="text/javascript" src="js/car.js"></script>
+
+
+</body>
+
+</html>

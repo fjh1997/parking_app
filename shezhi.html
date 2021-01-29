@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>html5触屏滑动侧边栏导航菜单特效 - 站长素材</title>
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+
+		<link rel="stylesheet" type="text/css" href="css/default.css">
+		<link href="css/offcanvas.min.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			.card {
+				width: 80%;
+				border-radius: 8px;
+				margin: 0 auto;
+				height: 250px;
+				background-color: #F7ECB5;
+			}
+
+			.shezhi-btn {
+				width: 30%;
+				height: 40px;
+				font-size: 140%;
+				border-radius: 10px;
+				margin: 0 auto;
+				background-color: #F0AD4E;
+			}
+		</style>
+		<script>
+			function change_readonly(number){
+				var temp = Number(number)
+				if(temp == 1){
+					document.getElementById("label1").removeAttribute("readonly");
+					document.getElementById("label2").readOnly = "readonly";
+					document.getElementById("label3").readOnly = "readonly";
+				}
+				if(temp == 2){
+					document.getElementById("label1").readOnly = "readonly";
+					document.getElementById("label2").removeAttribute("readonly");
+					document.getElementById("label3").readOnly = "readonly";
+				}
+				if(temp == 3){
+					document.getElementById("label1").readOnly = "readonly";
+					document.getElementById("label2").readOnly = "readonly";
+					document.getElementById("label3").removeAttribute("readonly");
+				}
+				
+			}
+			function submit(){
+				document.getElementById("label1").readOnly = "readonly";
+				document.getElementById("label2").readOnly = "readonly";
+				document.getElementById("label3").readOnly = "readonly";
+				alert("提交成功");
+			}
+		</script>
+	</head>
+	<body>
+
+		<nav class="navbar navbar-inverse navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed pull-left" data-toggle="offcanvas">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">设置</a>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse sidebar-offcanvas">
+					<ul class="nav navbar-nav">
+						<li><a href="index.html">首页</a></li>
+						<li><a href="dingdan.html">订单</a></li>
+						<li><a href="cheliangxinxi.html">车辆信息</a></li>
+						<li><a href="qianbao.html">钱包</a></li>
+						<li><a href="kefu.html">客服</a></li>
+						<li class="active"><a href="#">设置</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<div class="content" style="margin-bottom: 10px;">
+			<div class="card">
+				<br>
+				<p style="margin: 0 0;">您的姓名：</p>
+				<input id="label1" style="height:30px;width: 150px;" value="张明" readonly="readonly"/><button style="height: 30px; width:50px;" onclick="change_readonly(1)">编辑</button>
+				<p style="margin: 0 0;">您的邮箱：</p>
+				<input id="label2" style="height:30px;width: 150px;" value="111111111@qq.com" readonly="readonly"/><button style="height: 30px; width:50px;" onclick="change_readonly(2)">编辑</button>
+				<p style="margin: 0 0;">您的手机：</p>
+				<input id="label3" style="height:30px;width: 150px;" value="18333333333" readonly="readonly"/><button style="height: 30px; width:50px;" onclick="change_readonly(3)">编辑</button>
+				<div class="shezhi-btn" style="margin-top: 10px;" onclick="submit()">
+					<p>提交</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/offcanvas.js"></script>
+	</body>
+</html>

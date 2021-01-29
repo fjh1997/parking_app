@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>停车APP</title>
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/default.css">
+		<link href="css/offcanvas.min.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="css/map.css" media="screen" title="no title" charset="utf-8">
+
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/offcanvas.js"></script>
+		<script type="text/javascript" src="js/storage.js"></script>
+	</head>
+
+	<body>
+		<!-- 侧边栏与上边栏始终浮在屏幕上方 -->
+		<div class="upflow">
+			<!-- 侧边栏 -->
+			<nav class="navbar navbar-inverse navbar-static-top" style="padding: 0;margin: 0;">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed pull-left" data-toggle="offcanvas">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a style="text-align:center;" class="navbar-brand" href="#">车辆信息</a>
+					</div>
+
+					<div id="navbar" class="collapse navbar-collapse sidebar-offcanvas">
+						<ul class="nav navbar-nav">
+							<li><a href="index.html">首页</a></li>
+							<li><a href="dingdan.html">订单</a></li>
+							<li class="active"><a href="cheliangxinxi.html">车辆信息</a></li>
+							<li><a href="qianbao.html">钱包</a></li>
+							<li><a href="kefu.html">客服</a></li>
+							<li><a href="shezhi.html">设置</a></li>
+						</ul>
+					</div>
+
+				</div>
+
+			</nav>
+
+		</div>
+
+
+		<!-- 页面主要展示的内容 -->
+		<div id="cheliang_content" style="position:relative;top: 50px;">
+			<div style="height: 150px;width: 95%;position:relative;top: 10px;background-color: 	#00C5CD;margin: 0 auto;text-align: center;border-radius: 8px;">
+				<p>请依下表选择您的车型</p>
+				<table style="border:1px solid black;margin: 0 auto;">
+					<tr>
+						<td>车型</td>
+						<td>长度</td>
+						<td>宽度</td>
+					</tr>
+					<tr>
+						<td>轻型车</td>
+						<td>L < 3.7m</td> <td>W < 1.8m</td> </tr> <tr>
+						<td>小型车</td>
+						<td>3.7m < L < 5.0m</td> <td>1.8m < W < 2.0m</td> </tr> <tr>
+						<td>微型车</td>
+						<td>5.0m < L < 7.2m</td> <td>2.0m < W < 2.5m</td> </tr> </table> </div> <ul class="anniu" style="position:relative;top: 50px;">
+									<li>
+										<div id="chexing1">
+											<a onclick="button_press(1);">轻型车</a>
+										</div>
+									</li>
+									<li>
+										<div id="chexing2">
+											<a onclick="button_press(2);">小型车</a>
+										</div>
+									</li>
+									<li>
+										<div id="chexing3">
+											<a onclick="button_press(3);">微型车</a>
+										</div>
+									</li>
+									</ul>
+									<ul class="anniu" style="position:relative;top: 60px;">
+									<li>
+										<div id="baocun">
+											<a onclick="button_confirm();">保存</a>
+										</div>
+									</li>
+								</ul>
+								</div>
+
+	</body>
+</html>
